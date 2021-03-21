@@ -1,0 +1,5 @@
+{
+  "exec": "DEBUG=whos-next:* npm run dev",
+  "watch": [ "src/*" ],
+  "ext": "js"
+}
