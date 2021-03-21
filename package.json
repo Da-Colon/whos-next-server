@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development node -r esm ./src/bin/www",
-    "start": "node -r esm ./srcbin/www",
+    "start": "node -r esm ./src/bin/www",
     "nodemon": "nodemon NODE_ENV=development -r esm"
   },
   "dependencies": {
