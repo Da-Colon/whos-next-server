@@ -78,7 +78,7 @@ const UserSchema = new mongoose.Schema(
     first_name: String,
     last_name: String,
     permissions: permissionSchema,
-    email: emailSchema,
+    email_address: emailSchema,
     password: passwordSchema,
   }, {
     toJSON: {

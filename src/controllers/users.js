@@ -7,7 +7,7 @@ const create = async ( req, res ) => {
     if(response.error) return res.status(response.error.httpCode || 500).json({ message: response.error.message })
     return await res.status(200).json( response )
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return res.status(e.httpCode || 500).json( e.message || e )
   }
 }
@@ -19,7 +19,7 @@ const getAll = async ( req, res ) => {
     if(response.error) return res.status(response.error.httpCode || 500).json({ message: response.error.message })
     return await res.status(200).json( response )
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return res.status(e.httpCode || 500).json( e.message || e )
   }
 }
@@ -32,7 +32,7 @@ const getOne = async ( req, res ) => {
     return res.status(200).json( { user: response } )
 
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return res.status(e.httpCode || 500).json( e.message || e )
   }
 }
@@ -45,7 +45,7 @@ const update = async ( req, res, next ) => {
     if(response.error) return res.status(response.error.httpCode || 500).json({ message: response.error.message })
     return await res.status(200).json( response )
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return res.status(e.httpCode || 500).json( e.message || e )
   }
 }

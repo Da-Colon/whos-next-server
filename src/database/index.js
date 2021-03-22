@@ -54,7 +54,6 @@ export const addPlugins = schema => {
 
 export const migrate = db => {
   let count = 0;
-
   omg({
     should: function (name, cb) {
       Promise.resolve()

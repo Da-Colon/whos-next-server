@@ -1,5 +1,5 @@
 import express from 'express'
-import * as morgan from 'morgan'
+const morgan = require('morgan')
 import doCors from 'cors'
 
 export const logging = (app) => {

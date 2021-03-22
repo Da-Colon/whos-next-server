@@ -11,7 +11,7 @@ const login = async ( req, res, next ) => {
     return res.status(200).json( { message: 'ok!' } )
 
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return res.status(e.httpCode || 500).json( e.message || e )
   }
 }
@@ -26,9 +26,9 @@ const auth = async ( req, res ) => {
     req.user = response
     return res.status(200).json({message: 'ok!'})
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return res.status(e.httpCode || 500).json( e.message || e )
   }
 }
 
-export default { login, auth }
+export  { login, auth }

@@ -34,4 +34,29 @@ const handleError = (type, name, customMsg) => {
   }
 }
 
+export const errors = app => {
+  app.use((error, _req, res, _next) => {
+    res.status(error.status).json({ errors: error.message });
+  });
+}
+
+const serverError = message => ({
+  status: 500,
+  message: { unknown: [message] }
+})
+
+export const otherError = reject => {
+  return error => {
+    reject(serverError(error.message))
+  }
+}
+
+export const catchError = next => {
+  return error => {
+    const defaultError = serverError("an unknown error occurred")
+    const combinedError = { ...defaultError, ...error }
+    next({ status: combinedError.status, message: combinedError.message })
+  }
+}
+
 export default handleError

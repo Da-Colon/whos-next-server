@@ -1,7 +1,7 @@
 import debugLib from 'debug'
 import fs from 'fs'
 
-const debug = debugLib('propfolio:models')
+const debug = debugLib('whos-next:models')
 const _set = []
 
 export const models = async db => {

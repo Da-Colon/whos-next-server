@@ -1,10 +1,10 @@
-import { User } from '../../models/user';
+import { User } from '../../models/users';
 module.exports = function (cb) {
   const model = User(this.db)
   model.create({
     first_name: process.env.DEV_FIRST_NAME,
     last_name: process.env.DEV_LAST_NAME,
-    username: process.env.DEV_USERNAME,
+    email_address: process.env.DEV_EMAIL,
     password: process.env.DEV_PASSWORD,
   }).then(() => cb()).catch(this.debug);
 }
