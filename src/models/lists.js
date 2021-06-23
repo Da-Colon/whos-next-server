@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import handleError from "../errors"
 
 const ListsSchema = new mongoose.Schema(
@@ -30,10 +31,8 @@ const ListsSchema = new mongoose.Schema(
   }
 )
 
-addPlugins(ListsSchema);
-
 export const Lists = db => db.model('Lists', ListsSchema);
-export default LIsts;
+export default Lists;
 
 // model functions
 export const createList = (user, template, properties) => {
@@ -49,7 +48,7 @@ export const createList = (user, template, properties) => {
 }
 
 export const getOne = (template, id) => {
-  return new Promise((resove, reject) => {
+  return new Promise((resolve, reject) => {
     template
       .findOne({_id: id})
       .then(resolve)
