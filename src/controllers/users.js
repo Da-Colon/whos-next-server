@@ -37,7 +37,7 @@ const getOne = async ( req, res ) => {
   }
 }
 
-const update = async ( req, res, next ) => {
+const update = async ( req, res  ) => {
   try {
     const { query: { id }} = req
     const response = await updateUser(req.db, id, req.body)

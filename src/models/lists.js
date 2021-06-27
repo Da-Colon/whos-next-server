@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { addPlugins } from '../database'
 import handleError from "../errors"
 
 const ListsSchema = new mongoose.Schema(
@@ -31,6 +32,8 @@ const ListsSchema = new mongoose.Schema(
   }
 )
 
+addPlugins(ListsSchema);
+
 export const Lists = db => db.model('Lists', ListsSchema);
 export default Lists;
 
@@ -55,5 +58,52 @@ export const getOne = (template, id) => {
       .catch((error) => {
         reject(handleError('database', 'get one error', error))
       })
+  })
+}
+
+export const getAllByUser = (template, userId) => {
+  return new Promise((resolve, reject) => {
+    template
+      .find({user_id: mongoose.Schema.Types.ObjectId(userId)})
+      .then(resolve)
+      .catch((error) => {
+        reject(handleError('database', 'get all user error', error))
+      })
+  })
+}
+export const getAllPublic = (template) => {
+  return new Promise((resolve, reject) => {
+    template
+      .find({private: false})
+      .then(resolve)
+      .catch((error) => {
+        reject(handleError('database', 'get all public error', error))
+      })
+  })
+}
+
+export const updateOne = (template, id, userId) => {
+  return new Promise((resolve, reject) => {
+    template.updateOne({
+      _id: id, 
+      user_id: mongoose.Schema.Types.ObjectId(userId)
+    })
+    .then(resolve)
+    .catch((error) => {
+      reject(handleError('database', 'update list error', error))
+    })
+  })
+}
+
+export const deleteOne = (template, id, userId) => {
+  return new Promise((resolve, reject) => {
+    template.delete({
+      _id: id, 
+      user_id: mongoose.Schema.Types.ObjectId(userId)
+    })
+    .then(resolve)
+    .catch((error) => {
+      reject(handleError('database', 'update list error', error))
+    })
   })
 }

@@ -13,10 +13,12 @@ export const login = async (db, properties) => {
     const userTemplate = User(db)
     const tokenTemplate = Token(db)
     // Find User
-    const user = await lookupUser(userTemplate, {email: email})
-
+    const response = await lookupUser(userTemplate, {email: email})
+    if(response.error) {
+      return response
+    }
     // Check Password
-    const isValid = validatePassword(password, user.password)
+    const isValid = validatePassword(password, response.password)
     if(!isValid) return handleError(ERROR_TYPES.BAD_REQUEST, null, 'Password is not valid')
     
     // Create Token
@@ -27,11 +29,11 @@ export const login = async (db, properties) => {
     const token = await jwt.sign({ email }, JWT_SECRET, { expiresIn: tokenExpiresIn})
     
     // Save Token
-    const properties = {token: token, user: user.id, expirationDate: expirationDate}
+    const properties = {token: token, response: response.id, expirationDate: expirationDate}
     await saveToken(tokenTemplate, properties)
 
     // Return token
-    return {token: token, expirationDate: expirationDate}
+    return {user: response, token: token, expirationDate: expirationDate}
   } catch (e) {
     console.error(e)
     return {error: e}
@@ -56,10 +58,10 @@ export const auth = async (db, token) => {
       if(response.message !== 'ok!') return handleError(ERROR_TYPES.UNAUTHORIZED, null, 'Authorization expired')
     }
 
-    // get and return user
-    const user = await getUser(userTemplate, tokenObj.user)
-    if(!user.id) return handleError(ERROR_TYPES.UNKNOWN, null, 'There was a database error')
-    return user
+    // get and return response
+    const response = await getUser(userTemplate, tokenObj.response)
+    if(!response.id) return handleError(ERROR_TYPES.UNKNOWN, null, 'There was a database error')
+    return response
   
   } catch (e) { 
     console.error(e)

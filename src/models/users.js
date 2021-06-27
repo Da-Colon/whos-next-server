@@ -6,7 +6,7 @@ import handleError, { ERROR_TYPES } from '../errors'
 export const lookupUser = async ( template, query) => {
   try {
     const response = await template.findOne(query)
-    if(!response.id) handleError(ERROR_TYPES.NOT_FOUND, 'User')
+    if(!response) return handleError(ERROR_TYPES.NOT_FOUND, 'User')
     return response
   } catch (e) {
     console.error(e)
@@ -78,7 +78,7 @@ const UserSchema = new mongoose.Schema(
     first_name: String,
     last_name: String,
     permissions: permissionSchema,
-    email_address: emailSchema,
+    email: emailSchema,
     password: passwordSchema,
   }, {
     toJSON: {
