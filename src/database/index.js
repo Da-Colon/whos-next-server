@@ -64,7 +64,7 @@ export const migrate = db => {
     },
 
     did: function (name, cb) {
-      saveMigration(new Migration(db)({ name }))
+      saveMigration(Migration(db)({ name }))
         .then(() => {
           debug("performed migration", name);
           count++;
