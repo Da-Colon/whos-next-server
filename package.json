@@ -6,7 +6,7 @@
     "dev": "DEBUG=whos-next:* NODE_ENV=development node -r esm ./src/bin/www",
     "start": "node -r esm ./src/bin/www",
     "nodemon": "nodemon NODE_ENV=development -r esm",
-    "test": "NODE_ENV=test mocha" 
+    "test": "NODE_ENV=test mocha --recursive --require @babel/register" 
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
