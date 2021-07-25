@@ -75,8 +75,6 @@ export const validatePassword = (providedPassword, password) => {
 
 const UserSchema = new mongoose.Schema(
   {
-    first_name: String,
-    last_name: String,
     permissions: permissionSchema,
     email: emailSchema,
     password: passwordSchema,
