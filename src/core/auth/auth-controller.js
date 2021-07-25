@@ -1,5 +1,5 @@
 import Cookies from 'cookies'
-import { login as userLogin, auth as userAuth } from "../services/auth" 
+import { login as userLogin, auth as userAuth } from "./auth-service" 
 
 const login = async ( req, res ) => {
   try {

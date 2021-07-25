@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken"
-import handleError, { ERROR_TYPES } from "../errors"
-import Token, { deleteToken, findToken, saveToken } from "../models/token"
-import User, { lookupUser, getUser, validatePassword } from "../models/users"
-import { getExpDate } from "../utils"
+import handleError, { ERROR_TYPES } from "../../errors"
+import Token, { deleteToken, findToken, saveToken } from "../../models/token"
+import User, { lookupUser, getUser, validatePassword } from "../../models/users"
+import { getExpDate } from "../../utils"
 
 export const login = async (db, properties) => {
   const { email, password } = properties

@@ -1,5 +1,5 @@
-import ListsServices from "../services/lists";
-import ListServices from "../services/list";
+import ListsServices from "./lists-services";
+import ListServices from "../list/list-services";
 
 exports.createList = async (req, res) => {
   const listsResponse = await ListsServices.addToLists(req.db, req.body);

@@ -1,5 +1,5 @@
-import handleError, { ERROR_TYPES } from "../errors";
-import List, { createList, listsByUser } from "../models/list";
+import handleError, { ERROR_TYPES } from "../../errors";
+import List, { createList, listsByUser } from "../../models/list";
 
 exports.createList = async (db, listId, properties) => {
   try {

@@ -1,5 +1,5 @@
-import handleError, { ERROR_TYPES } from "../errors"
-import User, { getUser, getUsers, saveUser, updateUser } from "../models/users"
+import handleError, { ERROR_TYPES } from "../../errors"
+import User, { getUser, getUsers, saveUser, updateUser } from "../../models/users"
 
 export const create = async ( db, properties ) => {
   try {

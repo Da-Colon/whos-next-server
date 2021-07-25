@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Controller from '../controllers/lists'
+import Controller from './lists-controller'
 const listRouter = Router();
 
 listRouter.post("/", Controller.createList);

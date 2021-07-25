@@ -1,7 +1,7 @@
 import childProcess from 'child_process';
 import listEndpoints from 'express-list-endpoints';
 
-import packageJson from '../../package.json';
+import packageJson from '../../../package.json';
 
 const environment = process.env.NODE_ENV;
 const gitHash = 'git rev-parse --short HEAD';
