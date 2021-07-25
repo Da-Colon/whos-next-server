@@ -5,7 +5,9 @@ exports.createList = async (db, listId, properties) => {
   try {
     const template = List(db);
     const listResponse = await createList(template, listId, properties);
-    return listResponse;
+    if(listResponse.ok) {
+      return 'success'
+    } else return 'failed'
   } catch {
     return handleError(
       ERROR_TYPES.UNKNOWN,

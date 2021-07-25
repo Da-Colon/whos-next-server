@@ -34,14 +34,14 @@ export const Lists = (db) => db.model("Lists", ListsSchema);
 export default Lists;
 
 // model functions
-export const addToLists = (user, template, properties) => {
+export const addToLists = (template, user, properties) => {
   const { listName } = properties;
   const paramData = {
     list_name: listName,
-    user_id: user.id,
+    user_id: mongoose.Types.ObjectId(user.id),
   };
   return new Promise((resolve, reject) => {
-    template
+    return template
       .create(paramData)
       .then(resolve)
       .catch((error) => {
@@ -52,8 +52,8 @@ export const addToLists = (user, template, properties) => {
 
 export const findListsByUser = (template, userId) => {
   return new Promise((resolve, reject) => {
-    template
-      .find({ user_id: mongoose.Schema.ObjectId(userId) })
+    return template
+      .find({ user_id: mongoose.Types.ObjectId(userId) })
       .then(resolve)
       .catch((error) => {
         reject(handleError("database", "unable to retrieve lists by user", error));
@@ -63,7 +63,7 @@ export const findListsByUser = (template, userId) => {
 
 export const getAllPublic = (template) => {
   return new Promise((resolve, reject) => {
-    template
+    return template
       .find({ private: false })
       .then(resolve)
       .catch((error) => {
@@ -74,10 +74,10 @@ export const getAllPublic = (template) => {
 
 export const deleteOne = (template, id, userId) => {
   return new Promise((resolve, reject) => {
-    template
+    return template
       .delete({
         _id: id,
-        user_id: mongoose.Schema.Types.ObjectId(userId),
+        user_id: mongoose.Types.ObjectId(userId),
       })
       .then(resolve)
       .catch((error) => {

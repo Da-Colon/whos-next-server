@@ -1,10 +1,10 @@
 import handleError, { ERROR_TYPES } from "../../errors";
 import Lists, { addToLists, findListsByUser } from "../../models/lists";
 
-exports.addToLists = async (db, user) => {
+exports.addToLists = async (db, user, properties) => {
   try {
     const listsTemplate = Lists(db);
-    const addToListsResponse = await addToLists(listsTemplate, user);
+    const addToListsResponse = await addToLists(listsTemplate, user, properties);
     return addToListsResponse;
   } catch {
     return handleError(

@@ -29,7 +29,7 @@ export const login = async (db, properties) => {
     const token = await jwt.sign({ email }, JWT_SECRET, { expiresIn: tokenExpiresIn})
     
     // Save Token
-    const properties = {token: token, response: response.id, expirationDate: expirationDate}
+    const properties = {token: token, response: response.id, expirationDate: expirationDate, user: response.id}
     await saveToken(tokenTemplate, properties)
 
     // Return token
@@ -44,12 +44,11 @@ export const login = async (db, properties) => {
 export const auth = async (db, token) => {
   try {
     if(!token || token.length < 5) return handleError(ERROR_TYPES.BAD_REQUEST, null, "Not logged in")
-    const tokenStringArray = token.split(' ')
   
     const userTemplate = User(db)
     const tokenTemplate = Token(db)
 
-    const tokenObj = await findToken(tokenTemplate, tokenStringArray[1])
+    const tokenObj = await findToken(tokenTemplate, token)
     if(!tokenObj.id) return handleError(ERROR_TYPES.UNAUTHORIZED, null, 'Invalid authorization')
     
     // reject expired token
@@ -59,7 +58,7 @@ export const auth = async (db, token) => {
     }
 
     // get and return response
-    const response = await getUser(userTemplate, tokenObj.response)
+    const response = await getUser(userTemplate, tokenObj.user)
     if(!response.id) return handleError(ERROR_TYPES.UNKNOWN, null, 'There was a database error')
     return response
   

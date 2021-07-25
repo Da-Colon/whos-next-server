@@ -1,4 +1,5 @@
 import express from 'express'
+import {auth as authService } from '../core/auth/auth-service'
 const morgan = require('morgan')
 import doCors from 'cors'
 
@@ -18,4 +19,11 @@ export const encoding = (app) => {
 
 export const cors = (app) => {
   app.use(doCors());
+}
+
+export const authenticate = (req, _, next) => {
+  return authService(req.db, req.header("authorization"))
+    .then(user => req.user = user)
+    .then(() => next())
+    .catch(() => console.log('Something when wrong'))
 }

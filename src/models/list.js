@@ -36,12 +36,11 @@ export const createList = (template, listId, properties) => {
   const { name } = properties;
   const queryParams = {
     name: name,
-    listId: mongoose.Schema.Types.ObjectId(listId),
+    lists_id: mongoose.Types.ObjectId(listId),
   };
-  const propertiesWithUser = { queryParams, lists_id: listId };
   return new Promise((resolve, reject) => {
-    template
-      .create(propertiesWithUser)
+    return template
+      .create(queryParams)
       .then(resolve)
       .catch((error) => {
         reject(handleError("database", "create error", error));
@@ -51,8 +50,8 @@ export const createList = (template, listId, properties) => {
 
 export const listsByUser = (template, listId) => {
   return new Promise((resolve, reject) => {
-    template
-      .find({ lists_id: mongoose.Schema.Types.ObjectId(listId) })
+    return template
+      .find({ lists_id: mongoose.Types.ObjectId(listId) })
       .then(resolve)
       .catch((error) => {
         reject(handleError("database", "failed to retrieve lists", error));
@@ -61,7 +60,7 @@ export const listsByUser = (template, listId) => {
 };
 export const getAllPublic = (template) => {
   return new Promise((resolve, reject) => {
-    template
+    return template
       .find({ private: false })
       .then(resolve)
       .catch((error) => {
@@ -74,10 +73,10 @@ export const getAllPublic = (template) => {
 
 export const updateOne = (template, id, userId) => {
   return new Promise((resolve, reject) => {
-    template
+    return template
       .updateOne({
         _id: id,
-        lists_id: mongoose.Schema.Types.ObjectId(userId),
+        lists_id: mongoose.Types.ObjectId(userId),
       })
       .then(resolve)
       .catch((error) => {
@@ -88,10 +87,10 @@ export const updateOne = (template, id, userId) => {
 
 export const deleteOne = (template, id, userId) => {
   return new Promise((resolve, reject) => {
-    template
+    return template
       .delete({
         _id: id,
-        lists_id: mongoose.Schema.Types.ObjectId(userId),
+        lists_id: mongoose.Types.ObjectId(userId),
       })
       .then(resolve)
       .catch((error) => {

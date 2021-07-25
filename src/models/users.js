@@ -36,9 +36,9 @@ export const getUsers = async ( template ) => {
   }
 }
 
-export const getUser = async ( template, id ) => {
+export const getUser = async ( template, userId ) => {
   try {
-    const res = await template.findOne( {_id: mongoose.Types.ObjectId(id)} )
+    const res = await template.findOne( {_id: userId} )
     if(!res) handleError(ERROR_TYPES.NOT_FOUND, 'User')
     return res
   } catch (e) {
