@@ -54,7 +54,7 @@ export const findListsByUser = (template, userId) => {
   return new Promise((resolve, reject) => {
     return template
       .find({ user_id: mongoose.Types.ObjectId(userId) })
-      .then(resolve)
+      .then((user) => resolve(user))
       .catch((error) => {
         reject(handleError("database", "unable to retrieve lists by user", error));
       });

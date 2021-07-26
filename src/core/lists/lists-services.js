@@ -1,32 +1,24 @@
 import handleError, { ERROR_TYPES } from "../../errors";
-import Lists, { addToLists, findListsByUser } from "../../models/lists";
+import Lists, { addToLists as createList, findListsByUser as findLists } from "../../models/lists";
 
-exports.addToLists = async (db, user, properties) => {
+export const addToLists = async (db, user, properties) => {
   try {
     const listsTemplate = Lists(db);
-    const addToListsResponse = await addToLists(listsTemplate, user, properties);
+    const addToListsResponse = await createList(
+      listsTemplate,
+      user,
+      properties
+    );
     return addToListsResponse;
   } catch {
-    return handleError(
-      ERROR_TYPES.UNKNOWN,
-      "services",
-      "create error"
-    );
+    return handleError(ERROR_TYPES.UNKNOWN, "services", "create error");
   }
 };
 
-exports.findListsByUser = async (db, user) => {
-  try {
+export const findListsByUser = async (db, user) => {
     const listsTemplate = Lists(db);
-    const listsResponse = await findListsByUser(listsTemplate, user.id)
-    return listsResponse
-  } catch {
-    return handleError(
-      ERROR_TYPES.UNKNOWN,
-      "services",
-      "There was an service error"
-    );
-  }
+    const listsResponse = await findLists(listsTemplate, user.id);
+    return listsResponse;
 };
 
 exports.getPublicLists = () => {};

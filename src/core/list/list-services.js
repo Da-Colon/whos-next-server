@@ -1,38 +1,15 @@
-import handleError, { ERROR_TYPES } from "../../errors";
-import List, { createList, listsByUser } from "../../models/list";
+import List, { createList, listByListId as findList } from "../../models/list";
 
 exports.createList = async (db, listId, properties) => {
-  try {
     const template = List(db);
     const listResponse = await createList(template, listId, properties);
     if(listResponse.ok) {
       return 'success'
     } else return 'failed'
-  } catch {
-    return handleError(
-      ERROR_TYPES.UNKNOWN,
-      "services",
-      "There was an service error"
-    );
-  }
 };
 
-exports.listsByUser = async (db, listsDetails) => {
-  try {
-    const lists = Promise.all(
-      listsDetails.map(async (list) => {
-        const { id, list_name } = list
-        const template = List(db);
-        const listOfNames = await listsByUser(template, id);
-        return {listId: id, listName: list_name, list: listOfNames};
-      })
-    );
+export const listByListId = async (db, listDetails) => {
+    const template = List(db);
+    const lists = await findList(template, listDetails.id);
     return lists
-  } catch {
-    return handleError(
-      ERROR_TYPES.UNKNOWN,
-      "services",
-      "There was an service error"
-    );
-  }
 };

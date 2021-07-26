@@ -34,8 +34,28 @@ describe("Lists Route Tests - /lists", () => {
       expect(response.status).equal(200);
     });
 
-    // it("should return message", () => {
-   
-    // });
+    it("should return message", () => {
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).equal("success");
+    });
+  });
+
+  describe("GET - /lists", () => {
+    let response;
+    before(
+      async () =>
+        (response = await chai
+          .request(app)
+          .get(BASE_URL)
+          .set("Authorization", user.token))
+    );
+
+    it("should have status code 200", () => {
+      expect(response.status).equal(200);
+    })
+
+    it("should return all lists", () => {
+      expect(response.body[0].list).has.length(2)
+    })
   });
 });

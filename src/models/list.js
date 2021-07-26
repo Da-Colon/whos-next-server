@@ -48,16 +48,17 @@ export const createList = (template, listId, properties) => {
   });
 };
 
-export const listsByUser = (template, listId) => {
+export const listByListId = (template, listId) => {
   return new Promise((resolve, reject) => {
     return template
       .find({ lists_id: mongoose.Types.ObjectId(listId) })
-      .then(resolve)
+      .then((list) => resolve(list))
       .catch((error) => {
         reject(handleError("database", "failed to retrieve lists", error));
       });
   });
 };
+
 export const getAllPublic = (template) => {
   return new Promise((resolve, reject) => {
     return template
