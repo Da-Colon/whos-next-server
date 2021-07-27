@@ -21,7 +21,7 @@ export const createLists = async (req, res) => {
   );
   if (listPromise.error) {
     return res
-      .status(listsResponse.error?.httpCode || 500)
+      .status(listsResponse.error.httpCode || 500)
       .json({ message: listsResponse.error.message });
   }
   return res.status(200).json({ message: "success" });
@@ -32,7 +32,7 @@ export const findListsByUser = async (req, res) => {
     const listsDetails = await ListsServices.findListsByUser(req.db, req.user);
     if (listsDetails.error) {
       return res
-        .sendStatus(listsDetails.error?.httpCode || 500)
+        .sendStatus(listsDetails.error.httpCode || 500)
         .json(listsDetails.error.message);
     }
     const lists = await Promise.all(
