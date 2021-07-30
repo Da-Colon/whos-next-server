@@ -1,18 +1,20 @@
 import mongoose from "mongoose";
 import { addPlugins } from "../database";
-import handleError from "../errors";
 
 const ListsSchema = new mongoose.Schema(
   {
-    private: {
+    isPrivate: {
       type: Boolean,
       default: true,
     },
-    list_name: {
+    name: {
       type: String,
       require: true,
     },
-    user_id: {
+    list: {
+      type: Array,
+    },
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
@@ -32,56 +34,3 @@ addPlugins(ListsSchema);
 
 export const Lists = (db) => db.model("Lists", ListsSchema);
 export default Lists;
-
-// model functions
-export const addToLists = (template, user, properties) => {
-  const { listName } = properties;
-  const paramData = {
-    list_name: listName,
-    user_id: mongoose.Types.ObjectId(user.id),
-  };
-  return new Promise((resolve, reject) => {
-    return template
-      .create(paramData)
-      .then(resolve)
-      .catch((error) => {
-        reject(handleError("database", "create error", error));
-      });
-  });
-};
-
-export const findListsByUser = (template, userId) => {
-  return new Promise((resolve, reject) => {
-    return template
-      .find({ user_id: mongoose.Types.ObjectId(userId) })
-      .then((user) => resolve(user))
-      .catch((error) => {
-        reject(handleError("database", "unable to retrieve lists by user", error));
-      });
-  });
-};
-
-export const getAllPublic = (template) => {
-  return new Promise((resolve, reject) => {
-    return template
-      .find({ private: false })
-      .then(resolve)
-      .catch((error) => {
-        reject(handleError("database", "get all public error", error));
-      });
-  });
-};
-
-export const deleteOne = (template, id, userId) => {
-  return new Promise((resolve, reject) => {
-    return template
-      .delete({
-        _id: id,
-        user_id: mongoose.Types.ObjectId(userId),
-      })
-      .then(resolve)
-      .catch((error) => {
-        reject(handleError("database", "update list error", error));
-      });
-  });
-};

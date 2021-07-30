@@ -1,29 +1,23 @@
-import List, {createList, listByListId} from "../../src/models/list";
-import Lists, { addToLists } from "../../src/models/lists";
+import { create } from "../../src/core/lists/lists.services";
+import Lists from "../../src/models/lists";
 import { testDb } from "../global.spec";
 
 // creates list
-export const createTestList = async (user) => {
+export const createTestList = async (user, givenProps) => {
   const properties = {
-    listName: 'Test List',
+    name: "Test List",
     list: ["Goku", "Gohan"],
-  }
+  };
   const listsTemplate = Lists(testDb());
-  const listTemplate = List(testDb());
 
-  const list = await addToLists(listsTemplate, user, properties);
-  const listPromise = Promise.all(properties.list.map(async listItem => {
-    return await createList(listTemplate, list.id, listItem);
-  }))
-  if((!listPromise).includes('failed')) {
-    return list.id
-  }
-}
+  const list = await create(listsTemplate, user, givenProps || properties);
+  return list.id;
+};
 
 // retrieves list
 
 export const findList = async (listId) => {
   const listsTemplate = Lists(testDb());
-  const list = await listByListId(listsTemplate, listId)
-  return list
-}
+  const list = await listsTemplate.findOne({ _id: listId });
+  return list;
+};

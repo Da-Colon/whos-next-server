@@ -1,5 +1,5 @@
 import express from 'express'
-import {auth as authService } from '../core/auth/auth-service'
+import {auth as authService } from '../core/auth/auth.services'
 const morgan = require('morgan')
 import doCors from 'cors'
 

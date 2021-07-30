@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import controller from './users-controller'
+import controller from './users.controller'
 
 const usersRouter = Router();
 usersRouter.post('/', controller.create)

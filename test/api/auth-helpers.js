@@ -1,4 +1,4 @@
-import { login } from "../../src/core/auth/auth-service";
+import { login } from "../../src/core/auth/auth.services";
 import { saveUser, User } from "../../src/models/users";
 import { testDb } from "../global.spec";
 

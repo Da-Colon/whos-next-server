@@ -1,4 +1,4 @@
-import { create as createUser, getOne as getUser, getAll as getUsers, update as updateUser } from "./users-services"
+import { create as createUser, getOne as getUser, getAll as getUsers, update as updateUser } from "./users.services"
 
 const create = async ( req, res ) => {
   try {
