@@ -59,7 +59,7 @@ export const updateListsProperties = async (req, res) => {
       id,
       req.body
     );
-    if (!result?.ok) {
+    if (!result.ok) {
       return res.status(400).json({ message: "update unsuccessful" });
     }
     return res.status(200).json({ message: "update succesful" });
