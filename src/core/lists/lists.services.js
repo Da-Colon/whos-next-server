@@ -23,7 +23,7 @@ export const create = async (db, user, properties) => {
 
 export const findListsByUser = async (db, user) => {
   const listsTemplate = Lists(db);
-  return new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     return listsTemplate
       .find({ userId: Mongoose.Types.ObjectId(user.id) })
       .then((user) => resolve(user))

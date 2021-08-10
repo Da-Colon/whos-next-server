@@ -8,6 +8,5 @@ export const router = (app) => {
   app.use("/", root(app));
   app.use("/auth", auth);
   app.use("/users", users);
-  app.use("/list", authenticate, lists)
   app.use("/lists", authenticate, lists);
 };

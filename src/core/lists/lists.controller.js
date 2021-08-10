@@ -40,8 +40,7 @@ export const getPublicLists = async (req, res) => {
     const result = await ListsServices.getPublicLists(req.db);
 
     if (!result.length) {
-      return res
-        .status(400)
+      return res.status(204)
         .json({ error: 'no public lists available'});
     }
     return await res.status(200).json(result);

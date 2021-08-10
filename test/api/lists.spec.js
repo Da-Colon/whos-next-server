@@ -41,13 +41,13 @@ describe("Lists Route Tests - /lists", () => {
     });
   });
 
-  describe("GET - /isPrivate", () => {
+  describe("GET - /user", () => {
     let response;
     before(
       async () =>
         (response = await chai
           .request(app)
-          .get(`${BASE_URL}/isPrivate`)
+          .get(`${BASE_URL}/user`)
           .set("Authorization", user.token))
     );
 

@@ -3,7 +3,7 @@ import * as controller from "./lists.controller";
 const listsRouter = Router();
 
 listsRouter.post("/", controller.createLists);
-listsRouter.get("/isPrivate", controller.findListsByUser);
+listsRouter.get("/user", controller.findListsByUser);
 listsRouter.get("/public", controller.getPublicLists);
 listsRouter.get("/:id", controller.getList);
 listsRouter.put("/:id", controller.updateListsProperties);
