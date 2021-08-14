@@ -14,6 +14,9 @@ export const createLists = async (req, res) => {
 export const findListsByUser = async (req, res) => {
   try {
     const result = await ListsServices.findListsByUser(req.db, req.user);
+    if(!result.length) {
+      return await res.status(200).json({message: 'No Lists created'})
+    }
     return await res.status(200).json(result);
   } catch (e) {
     console.error(e);
@@ -26,7 +29,7 @@ export const getList = async (req, res) => {
     const { id } = req.params;
     const result = await ListsServices.getList(req.db, id);
     if (!result) {
-      return res.status(400).json({ error: "list not found" });
+      return res.status(400).json({ message: "list not found" });
     }
     return await res.status(200).json(result);
   } catch (e) {
@@ -40,8 +43,8 @@ export const getPublicLists = async (req, res) => {
     const result = await ListsServices.getPublicLists(req.db);
 
     if (!result.length) {
-      return res.status(204)
-        .json({ error: 'no public lists available'});
+      return await res.status(200)
+        .json({ message: 'no public lists available'});
     }
     return await res.status(200).json(result);
   } catch (e) {
