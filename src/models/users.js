@@ -18,7 +18,7 @@ export const saveUser = async ( template, properties ) => {
   try {
     const response = await template.create(properties)
     if(!response) handleError(ERROR_TYPES.UNKNOWN, null, 'There was an database error')
-    return { message: "User has been registered" }
+    return { message: "User has been registered", user: response }
   } catch (e) {
     console.error(e)
     return { error: e }

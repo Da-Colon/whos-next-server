@@ -1,5 +1,6 @@
 import handleError, { ERROR_TYPES } from "../../errors"
 import User, { getUser, getUsers, saveUser, updateUser } from "../../models/users"
+import { createUserPreference } from "../userPreference/userPreference.services"
 
 export const create = async ( db, properties ) => {
   try {
@@ -8,6 +9,9 @@ export const create = async ( db, properties ) => {
 
     const template = User( db )
     const res = await saveUser( template, properties )
+    if(res.user) {
+      await createUserPreference(db, res.user)
+    }
     return res
   } catch (e) {
     console.error(e)

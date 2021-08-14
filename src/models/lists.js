@@ -14,10 +14,24 @@ const ListsSchema = new mongoose.Schema(
     list: {
       type: Array,
     },
+    likes: {
+      type: Number,
+      default: 0
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    createdId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Lists",
+      default: null,
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    }
   },
   {
     toJSON: {
