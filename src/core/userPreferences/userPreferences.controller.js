@@ -1,10 +1,10 @@
-import * as userPreferenceServices from "./userPreference.services";
+import * as UserPreferencesServices from "./userPreferences.services";
 
 export const updateSelectedList = async (req, res) => {
   const user = req.user;
   const database = req.db;
   const params = req.params;
-  const result = await userPreferenceServices.updatePreferences(
+  const result = await UserPreferencesServices.updateUserPreferences(
     database,
     user,
     { selectedList: params.listId }
@@ -20,12 +20,12 @@ export const updateLikedLists = async (req, res) => {
     const user = req.user;
     const database = req.db;
     const { listId } = req.params;
-    const userPreferences = await userPreferenceServices.getPreferences(
+    const userPreferences = await UserPreferencesServices.getUserPreferences(
       database,
       user
     );
     const likedLists = [...userPreferences.likedLists, ...[listId]];
-    const result = await userPreferenceServices.updatePreferences(
+    const result = await UserPreferencesServices.updateUserPreferences(
       database,
       user,
       { likedLists: likedLists }
@@ -42,7 +42,7 @@ export const updateLikedLists = async (req, res) => {
 export const getPreferences = async (req, res) => {
   const user = req.user;
   const database = req.db;
-  const result = await userPreferenceServices.getPreferences(database, user);
+  const result = await UserPreferencesServices.getUserPreferences(database, user);
   if (!result.id) {
     return res
       .status(200)
@@ -56,12 +56,12 @@ export const removedLikedList = async (req, res) => {
     const user = req.user;
     const database = req.db;
     const { listId } = req.params;
-    const userPreferences = await userPreferenceServices.getPreferences(
+    const userPreferences = await UserPreferencesServices.getUserPreferences(
       database,
       user
     );
     const likedLists = userPreferences.likedLists.filter((list) => list.id !== listId);
-    const result = await userPreferenceServices.updatePreferences(
+    const result = await UserPreferencesServices.updateUserPreferences(
       database,
       user,
       { likedLists: likedLists }

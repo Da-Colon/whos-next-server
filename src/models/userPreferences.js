@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { addPlugins } from "../database";
 
-const UserPreferenceSchema = new mongoose.Schema(
+const UserPreferencesSchema = new mongoose.Schema(
   {
     likedLists: {
       type: Array,
@@ -29,7 +29,7 @@ const UserPreferenceSchema = new mongoose.Schema(
   }
 );
 
-addPlugins(UserPreferenceSchema);
+addPlugins(UserPreferencesSchema);
 
-export const UserPreference = (db) => db.model("UserPreference", UserPreferenceSchema);
-export default UserPreference;
+export const UserPreferences = (db) => db.model("UserPreferences", UserPreferencesSchema);
+export default UserPreferences;

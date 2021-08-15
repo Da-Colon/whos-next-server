@@ -41,7 +41,7 @@ describe("UserPreferences Route Tests - /userPreferences", () => {
       it("returns message", () => {
         expect(response.body.message).equal("update Successful");
       });
-      it("selected list is added to userPreference", async () => {
+      it("selected list is added to userPreferences", async () => {
         const {selectedList} = await userPreferencesHelper.getUserPreferences(user.user)
         expect(selectedList).eql(Mongoose.Types.ObjectId(listId))
       })
@@ -60,7 +60,7 @@ describe("UserPreferences Route Tests - /userPreferences", () => {
 
       it("returns message", () => {
         expect(response.body.error).equal(
-          "database error: unable to update preference"
+          "database error: unable to update UserPreferences"
         );
       });
     });
@@ -98,7 +98,7 @@ describe("UserPreferences Route Tests - /userPreferences", () => {
 
       it("returns message", () => {
         expect(response.body.error).equal(
-          "database error: unable to update preference"
+          "database error: unable to update UserPreferences"
         );
       });
     });
@@ -136,7 +136,7 @@ describe("UserPreferences Route Tests - /userPreferences", () => {
 
       it("returns message", () => {
         expect(response.body.error).equal(
-          "database error: unable to update preference"
+          "database error: unable to update UserPreferences"
         );
       });
     });
@@ -155,7 +155,7 @@ describe("UserPreferences Route Tests - /userPreferences", () => {
       expect(response.status).equal(200);
     });
 
-    it("returns users' preferences", () => {
+    it("returns users' userPreferences", () => {
       expect(response.body.userId).equal(user.user.id);
     });
   })
