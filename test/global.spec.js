@@ -6,7 +6,7 @@ let _testDb;
 let _testApp;
 
 before(async () => {
-  _testDb = database('propfolio-test');
+  _testDb = database('whos-next-test');
   _testApp = await app(_testDb);
   
   for (let model of set()) {

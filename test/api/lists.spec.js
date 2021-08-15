@@ -108,7 +108,7 @@ describe("Lists Route Tests - /lists", () => {
         expect(response.body.id).equal(listId);
       });
     });
-    describe("fails if", () => {
+    describe("message send back if", () => {
       before(
         async () =>
           (response = await chai
@@ -117,7 +117,7 @@ describe("Lists Route Tests - /lists", () => {
             .set("Authorization", user.token))
       );
       it("list is not found", () => {
-        expect(response.body).has.property("error").equal("list not found");
+        expect(response.body).has.property("message").equal("list not found");
       });
     });
   });
