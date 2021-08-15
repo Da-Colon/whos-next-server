@@ -24,14 +24,14 @@ const login = async (req, res) => {
 
 const auth = async (req, res) => {
   try {
-    const cookies = new Cookies(req, res);
-    const token = await cookies.get("token");
+    const token = req.headers.authorization;
     const response = await userAuth(req.db, token);
 
-    if (response.error)
-      return res.status(response.error.httpCode || 500).json({ response });
+    if (response.error) {
+      return res.status(response.error.httpCode || 500);
+    }
     req.user = response;
-    return res.status(200).json({ message: "ok!" });
+    return res.status(200).json({ user: response });
   } catch (e) {
     console.error(e);
     return res.status(e.httpCode || 500).json(e.message || e);
