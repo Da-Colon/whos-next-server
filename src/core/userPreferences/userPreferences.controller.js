@@ -43,7 +43,7 @@ export const getPreferences = async (req, res) => {
   const user = req.user;
   const database = req.db;
   const result = await UserPreferencesServices.getUserPreferences(database, user);
-  if (!result.id) {
+  if (!result) {
     return res
       .status(200)
       .json({ message: "unable to retrieve user preferences" });

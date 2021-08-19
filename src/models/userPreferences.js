@@ -10,6 +10,7 @@ const UserPreferencesSchema = new mongoose.Schema(
     selectedList: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Lists",
+      default: null,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

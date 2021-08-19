@@ -88,7 +88,7 @@ export const auth = async (db, token) => {
 
     // get and return response
     const response = await getUser(userTemplate, tokenObj.user);
-    if (!response.id)
+    if (!response)
       return handleError(
         ERROR_TYPES.UNKNOWN,
         null,
