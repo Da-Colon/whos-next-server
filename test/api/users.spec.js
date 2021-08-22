@@ -23,8 +23,11 @@ describe("Users Route Tests - /user", () => {
     });
 
     it("should return user object", async () => {
-      expect(response.body).to.haveOwnProperty("message");
-      expect(response.body.message).to.equal("User has been registered");
+      expect(response.body).to.haveOwnProperty("user");
+      expect(response.body).to.haveOwnProperty("token");
+      expect(response.body.user).to.haveOwnProperty("email");
+      expect(response.body.user).to.haveOwnProperty("id");
+      expect(response.body.user.email).to.equal(SIGN_UP.email);
     });
   });
 });

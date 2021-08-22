@@ -50,9 +50,12 @@ export const login = async (db, properties) => {
       user: response.id,
     };
     await saveToken(tokenTemplate, properties);
-
+    const user = {
+      email: response.email,
+      id: response.id,
+    }
     // Return token
-    return { user: response, token: token, expirationDate: expirationDate };
+    return { user: user, token: token, expirationDate: expirationDate };
   } catch (e) {
     console.error(e);
     return { error: e };
@@ -68,7 +71,7 @@ export const auth = async (db, token) => {
     const tokenTemplate = Token(db);
 
     const tokenObj = await findToken(tokenTemplate, token);
-    if (!tokenObj.id)
+    if (!tokenObj)
       return handleError(
         ERROR_TYPES.UNAUTHORIZED,
         null,

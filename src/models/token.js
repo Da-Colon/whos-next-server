@@ -13,7 +13,7 @@ const TokenSchema = new mongoose.Schema({
 export const findToken = async (template, token) => {
   try {
     const response = await template.findOne({token: token})
-    if(!response.id) handleError(ERROR_TYPES.NOT_FOUND, 'Authorization')
+    if(!response) handleError(ERROR_TYPES.NOT_FOUND, 'Authorization')
     return response
   } catch (e) {
     // console.error(e)

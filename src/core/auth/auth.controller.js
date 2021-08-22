@@ -3,14 +3,15 @@ import { login as userLogin, auth as userAuth } from "./auth.services";
 
 const login = async (req, res) => {
   try {
-    const cookies = new Cookies(req, res);
     const response = await userLogin(req.db, req.body);
 
-    if (response.error)
+    if (response.error) {
       return res
         .status(response.error.httpCode || 500)
         .json({ error: response.error.message });
+    }
 
+    const cookies = new Cookies(req, res);
     cookies.set("token", response.token, { expries: response.expirationDate });
 
     return res
