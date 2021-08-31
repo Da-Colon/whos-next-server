@@ -76,7 +76,7 @@ export const deleteList = async (req, res) => {
     const { id } = req.params;
     const result = await ListsServices.deleteList(req.db, id);
     if (result.deletedCount !== 1)
-      return res.status(400).json({ error: "List not found" });
+      return res.status(200).json({ error: "could not delete list" });
     return await res.status(200).json({ message: "success" });
   } catch (e) {
     console.error(e);

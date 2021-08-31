@@ -9,7 +9,7 @@ export const create = async (db, user, properties) => {
     name: name,
     list: list,
     userId: Mongoose.Types.ObjectId(user.id),
-    isPrivate: isPrivate
+    isPrivate: isPrivate,
   };
   return new Promise((resolve, reject) => {
     return listsTemplate
@@ -44,7 +44,10 @@ export const getList = async (db, id) => {
       })
       .then(resolve)
       .catch((e) => {
-        console.error("There was a database error ~ getList ~ /:id ~ services", e);
+        console.error(
+          "There was a database error ~ getList ~ /:id ~ services",
+          e
+        );
         reject();
       });
   });
@@ -52,9 +55,10 @@ export const getList = async (db, id) => {
 
 export const updatelistsProperties = async (db, listsId, properties) => {
   const listsTemplate = Lists(db);
-  const params = {};
+  const params = {
+    isPrivate: properties.isPrivate,
+  };
   if (properties.name) params.name = properties.name;
-  if (!properties.isPrivate) params.isPrivate = properties.isPrivate;
   if (properties.list) params.list = properties.list;
   return new Promise((resolve, reject) => {
     return listsTemplate
@@ -67,7 +71,7 @@ export const updatelistsProperties = async (db, listsId, properties) => {
 };
 
 export const getPublicLists = (db) => {
-  const listsTemplate = Lists(db)
+  const listsTemplate = Lists(db);
   return new Promise((resolve, reject) => {
     return listsTemplate
       .find({ isPrivate: false })
