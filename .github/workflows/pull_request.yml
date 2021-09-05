@@ -6,20 +6,33 @@ on:
 
 # Run Tests
 jobs:
-  Build-Enviorment:
+  build-and-test:
     # Run lastest ubuntu-latest OS
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
       - name: Use Node.js 16.2.0
-      # Step 1: use correct node version
         uses: actions/setup-node@v2
         with:
           node-version: 16.2.0
           cache: 'npm'
-      # Step 2: run ci: builds packages
-      - run: npm ci
+      - name: Install Packages
+        run: npm install
+      
+      - nane: Set Enviroment
+        env:
+          PORT: 8080
+          BCRYPT_COST: ${{ develop.BCRYPT_COST }}
+          DB_HOST: ${{ develop.DB_HOST }}
+          DB_PORT: ${{ develop.DB_HOST }}
+          DB_NAME: ${{ develop.DB_HOST }}
+          TOKEN_EXPIRES_NUMBER: ${{ develop.DB_HOST }}
+          TOKEN_EXPIRES_UNIT: ${{ develop.DB_HOST }}
+          JWT_SECRET: ${{ develop.DB_HOST }}
+          TOKEN_EXPIRATION_DAYS: ${{ develop.DB_HOST }}
 
       # Step 3: Set up docker container for database
       - name: Login to Docker Hub
