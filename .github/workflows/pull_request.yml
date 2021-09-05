@@ -22,7 +22,7 @@ jobs:
       - name: Install Packages
         run: npm install
       
-      - nane: Set Enviroment
+      - name: Set Enviroment
         env:
           PORT: 8080
           BCRYPT_COST: ${{ develop.BCRYPT_COST }}
@@ -33,8 +33,8 @@ jobs:
           TOKEN_EXPIRES_UNIT: ${{ develop.DB_HOST }}
           JWT_SECRET: ${{ develop.DB_HOST }}
           TOKEN_EXPIRATION_DAYS: ${{ develop.DB_HOST }}
+        run: echo env variable registered
 
-      # Step 3: Set up docker container for database
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -46,6 +46,6 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-      # Step 4: run tests
+
       - name: Run Tests
         run: npm test
