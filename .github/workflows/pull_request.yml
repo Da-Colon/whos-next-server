@@ -25,14 +25,14 @@ jobs:
       - name: Set Enviroment
         env:
           PORT: 8080
-          BCRYPT_COST: ${{ develop.BCRYPT_COST }}
-          DB_HOST: ${{ develop.DB_HOST }}
-          DB_PORT: ${{ develop.DB_HOST }}
-          DB_NAME: ${{ develop.DB_HOST }}
-          TOKEN_EXPIRES_NUMBER: ${{ develop.DB_HOST }}
-          TOKEN_EXPIRES_UNIT: ${{ develop.DB_HOST }}
-          JWT_SECRET: ${{ develop.DB_HOST }}
-          TOKEN_EXPIRATION_DAYS: ${{ develop.DB_HOST }}
+          BCRYPT_COST: ${{ secrets.BCRYPT_COST }}
+          DB_HOST: $DB_HOST
+          DB_PORT: $DB_PORT
+          DB_NAME: $DB_NAME
+          TOKEN_EXPIRES_NUMBER: $TOKEN_EXPIRES_NUMBER
+          TOKEN_EXPIRES_UNIT: $TOKEN_EXPIRES_UNIT
+          JWT_SECRET: $JWT_SECRET
+          TOKEN_EXPIRATION_DAYS: $TOKEN_EXPIRATION_DAYS
         run: echo env variable registered
 
       - name: Login to Docker Hub
