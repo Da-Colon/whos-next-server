@@ -25,7 +25,7 @@ jobs:
       - name: Set Enviroment
         env:
           PORT: 8080
-          BCRYPT_COST: ${{ secrets.BCRYPT_COST }}
+          BCRYPT_COST: $BCRYPT_COST
           DB_HOST: $DB_HOST
           DB_PORT: $DB_PORT
           DB_NAME: $DB_NAME
