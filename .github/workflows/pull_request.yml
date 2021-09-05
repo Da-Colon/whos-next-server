@@ -9,6 +9,16 @@ jobs:
   build-and-test:
     # Run lastest ubuntu-latest OS
     runs-on: ubuntu-latest
+    env:
+      PORT: ${{secrets.DEV_PORT}}
+      BCRYPT_COST: ${{secrets.BCRYPT_COST}}
+      DB_HOST: ${{secrets.DEV_DB_HOST}}
+      DB_PORT: ${{secrets.DEV_DB_PORT}}
+      DB_NAME: ${{secrets.DEV_DB_NAME}}
+      TOKEN_EXPIRES_NUMBER: ${{secrets.TOKEN_EXPIRES_NUMBER}}
+      TOKEN_EXPIRES_UNIT: ${{secrets.TOKEN_EXPIRES_UNIT}}
+      JWT_SECRET: ${{secrets.DEV_JWT_SECRET}}
+      TOKEN_EXPIRATION_DAYS: ${{secrets.TOKEN_EXPIRATION_DAYS}}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout 🛎️
@@ -35,14 +45,4 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
       - name: Run Tests
-        env:
-          PORT: ${{secrets.DEV_PORT}}
-          BCRYPT_COST: ${{secrets.BCRYPT_COST}}
-          DB_HOST: ${{secrets.DEV_DB_HOST}}
-          DB_PORT: ${{secrets.DEV_DB_PORT}}
-          DB_NAME: ${{secrets.DEV_DB_NAME}}
-          TOKEN_EXPIRES_NUMBER: ${{secrets.TOKEN_EXPIRES_NUMBER}}
-          TOKEN_EXPIRES_UNIT: ${{secrets.TOKEN_EXPIRES_UNIT}}
-          JWT_SECRET: ${{secrets.DEV_JWT_SECRET}}
-          TOKEN_EXPIRATION_DAYS: ${{secrets.TOKEN_EXPIRATION_DAYS}}
         run: npm test
