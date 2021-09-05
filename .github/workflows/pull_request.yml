@@ -22,6 +22,6 @@ jobs:
       - run: npm ci
 
       # Step 3: Set up docker container for database
-      - run: docker-compose up --DB_PORT=${{ secrets.DB_PORT}}
+      - run: docker-compose -d up --DB_PORT=${{ secrets.DB_PORT}}
       # Step 4: run tests
       - run: npm test
