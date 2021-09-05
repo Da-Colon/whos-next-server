@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Run Docker Compose
-        run: docker-compose up -d --DB_PORT=${{ secrets.develop.DB_PORT}}
+        run: docker compose up -d --DB_PORT=${{ secrets.develop.DB_PORT}}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       # Step 4: run tests
