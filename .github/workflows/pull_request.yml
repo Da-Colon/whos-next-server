@@ -1,0 +1,24 @@
+# 
+name: PR Workflow
+on: pull_request
+# Run Tests
+jobs:
+  Build-Enviorment:
+    # Run lastest ubuntu-latest OS
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.2.0
+      # Step 1: use correct node version
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.2.0
+          cache: 'npm'
+      # Step 2: run ci: builds packages
+      - run: npm ci
+
+      # Step 3: Set up docker container for database
+      - run: docker-compose up
+      # Step 4: run tests
+      - run: npm test
