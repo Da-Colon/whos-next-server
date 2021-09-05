@@ -1,6 +1,9 @@
 # 
-name: PR Workflow
-on: pull_request
+name: Develop Pull Requests Workflow
+on: 
+  pull_request:
+    branches: develop
+
 # Run Tests
 jobs:
   Build-Enviorment:
@@ -19,6 +22,6 @@ jobs:
       - run: npm ci
 
       # Step 3: Set up docker container for database
-      - run: docker-compose up
+      - run: docker-compose up --DB_PORT=${{ secrets.DB_PORT}}
       # Step 4: run tests
       - run: npm test
