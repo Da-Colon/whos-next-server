@@ -1,8 +1,6 @@
 #
 name: Develop Pull Requests Workflow
 on:
-  merge:
-    branches: develop
   push:
     branches: develop
 # Run Tests
