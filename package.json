@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=whos-next:* NODE_ENV=development node -r esm ./src/bin/www",
+    "dev": "npm run docker-dev & DEBUG=whos-next:* NODE_ENV=development node -r esm ./src/bin/www",
+    "docker-dev": "docker-compose up -d",
     "start": "node -r esm ./src/bin/www",
     "nodemon": "nodemon NODE_ENV=development -r esm",
+    "test-locally": "npm run docker-dev & NODE_ENV=test mocha --recursive --require @babel/register",
     "test": "NODE_ENV=test mocha --recursive --require @babel/register"
   },
   "dependencies": {
